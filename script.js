@@ -36,7 +36,15 @@ function createDisplayNode(valuesFromForm){
     }
 
 
-    
+    deleteButton.addEventListener("click", () => {
+        
+        animeLibrary = animeLibrary.filter(anime => anime.title === libraryItemChildren[0]);
+
+        library.removeChild(libraryItemClone);
+        console.log(animeLibrary);
+
+    });
+
 
     console.log(libraryItemChildren);
 
