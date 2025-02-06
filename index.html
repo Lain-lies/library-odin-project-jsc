@@ -3,49 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Library</title>
     <link rel="stylesheet" href="./styles.css">
     <script src="./script.js" defer></script>
 
 </head>
 <body>
 
+    <form>
+ 
+        <div class = "form-container">
+        
+            <h2>Add New Anime to Library</h2>
     
-    <div class = "form-container">
-        
-        <h2>Add a new book</h2>
-
-        <label for="book-title">
-            Book Title:<input type="text" id = "book-title">
-        </label>
-        
-
-        <label for="book-author">
-            Book Author:<input type="text" id = "book-author">
-        </label>
-        
-
-        <label for="book-pages">
-            Number of Pages:<input type="number" id = "book-pages">
-        </label>
-        
-
-        <label for = "book-status">
-            Finish Reading?
+            <label for="anime-title">
+                Anime Title:<input type="text" id = "anime-title" name = "animeTitle" required>
+            </label>
+    
+            <label for="anime-author">
+                Creator:<input type="text" id = "anime-author" name = "animeAuthor" required>
+            </label>
             
-            <input type="radio" id = "book-status" name = "readStatus" value = "true">
-            <input type="radio" id = "book-status" name = "readStatus" value = "false">
     
-        </label>
+            <label for="anime-episodes">
+                Number of Episodes:<input type="number" id = "anime-episodes" name = "animeEpisodes" required>
+            </label> 
+            
+    
+            <label for = "anime-status">
+                Finish Watching?
+                
+                <input type="radio" id = "anime-status" name = "readStatus" value = "true" required>
+                <input type="radio" id = "anime-status" name = "readStatus" value = "false" >
+        
+            </label>
 
-        <button type = "button">Submit</button>
-       
-    </div>
+            <button type = "submit">Add to Library</button>
+
     
+           
+        </div>
+    
+    </form>
+
     <div class = "library-container">
+        
+        <h2>Your Library</h2>
+        <div class = "library">
 
-        
-        
+            <div class = "library-item">
+                sample
+            </div>
+        </div>
+
     </div>
+    
 </body>
 </html>

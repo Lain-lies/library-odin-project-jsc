@@ -1,38 +1,42 @@
-console.log("test connection");
+const form = document.querySelector("form");
+const animeLibrary = [];
 
-const library = [];
+const libraryItem = document.querySelector(".library-item");
 
-function Book(title, author, pages, readStatus){
+function addAnimeToLibrary(valuesFromForm){
+
+    const generatedAnime = new Anime(...valuesFromForm);
+    animeLibrary.push(generatedAnime);
+    libraryItem.textContent = `${animeLibrary[0].title}`;
     
-    if(!(this instanceof Book)) throw Error ("Must use the new operator to call the func");
+}
+
+function Anime(title, author, episodes, watchStatus){
+    if(!(this instanceof Anime)) throw Error ("Must use the new operator to call the func");
 
     this.title = title;
     this.author = author;
-    this.pages = pages;
-    this.readStatus = readStatus;
+    this.episodes = episodes;
+    this.watchStatus = watchStatus;
+    this.displayNode = null;    
 }
 
+function extractValuesFromForm(event){
 
-function addBookToLibrary(title, author, pages, readStatus){
-    
-    let generatedBook = new Book(title, author, pages, readStatus);
-    library.push(generatedBook);
-    
+    event.preventDefault()
+    const formData = new FormData(form);
+    const valuesFromForm = [...formData.values()];
+    addAnimeToLibrary(valuesFromForm);
 
 }
 
-function iterateLibrary(){
-    
-    library.forEach(book => {
-        console.log(book);
-    });
-}
+form.addEventListener("submit", extractValuesFzromForm);
+
 
 // sample data for testing
-addBookToLibrary("Call of Cthulhu", "H.P. Lovecraft", 420, true);
-addBookToLibrary("Call of Cthulhu 2", "H.P. Lovecraft", 419, true);
-addBookToLibrary("Call of Cthulhu 3: Return of the electric boogaloo", "H.P. Lovecraft", 418, false);
-
+// addAnimeToLibrary("One Piece", "Oda", "ongoing", true);
+// addAnimeToLibrary("Baccano", "Ryogo Narita", 16, true);
+// addAnimeToLibrary("Charlotte", "Jun Maeda", 12, false);
 
 
 
