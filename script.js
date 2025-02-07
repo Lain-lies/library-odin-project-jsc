@@ -10,7 +10,12 @@ function addAnimeToLibrary(valuesFromForm){
 
     const generatedAnime = new Anime(...valuesFromForm);
     animeLibrary.push(generatedAnime);
+
+    generatedAnime.showInDOM(generatedAnime.createDisplayNode(generatedAnime)); 
     
+    console.log(animeLibrary);
+    console.log(Object.getPrototypeOf(Anime));
+
 }
 
 function Anime(title, author, episodes, watchStatus){
@@ -20,34 +25,48 @@ function Anime(title, author, episodes, watchStatus){
     this.author = author;
     this.episodes = episodes;
     this.watchStatus = watchStatus;
-    this.displayNode = null;    
+    
 }
 
-function createDisplayNode(valuesFromForm){
+Anime.prototype.createDisplayNode = function (){ 
 
     const libraryItemClone = libraryItem.cloneNode(true);
     const libraryItemChildren = [...libraryItemClone.children];
     const changeStatusButton = libraryItemChildren[libraryItemChildren.length - 2];
     const deleteButton = libraryItemChildren[libraryItemChildren.length - 1];
+    const animeValues = Object.values(this);
 
-    for(let i = 0; i < valuesFromForm.length; i++){
+    for(let i = 0; i < animeValues.length; i++){
 
-        libraryItemChildren[i].textContent = valuesFromForm[i];
+        libraryItemChildren[i].textContent = animeValues[i];
+
     }
 
+    changeStatusButton.addEventListener("click", () => {
+
+        this.watchStatus = "clicked";
+        console.log(this);
+
+    }); 
 
     deleteButton.addEventListener("click", () => {
         
-        animeLibrary = animeLibrary.filter(anime => anime.title === libraryItemChildren[0]);
+        animeLibrary = animeLibrary.filter(anime => anime.title === libraryItemChildren[0].textContent);
 
         library.removeChild(libraryItemClone);
         console.log(animeLibrary);
 
     });
 
+    console.log(libraryItemClone);
 
-    console.log(libraryItemChildren);
+    return libraryItemClone;
 
+}
+
+Anime.prototype.showInDOM = function (displayNode) {
+    
+    library.appendChild(displayNode);
 }
 
 function extractValuesFromForm(event){
@@ -56,21 +75,8 @@ function extractValuesFromForm(event){
     const formData = new FormData(form);
     const valuesFromForm = [...formData.values()];
 
-    createDisplayNode(valuesFromForm); 
     addAnimeToLibrary(valuesFromForm);
 
 }
 
 form.addEventListener("submit", extractValuesFromForm);
-
-
-// sample data for testing
-// addAnimeToLibrary("One Piece", "Oda", "ongoing", true);
-// addAnimeToLibrary("Baccano", "Ryogo Narita", 16, true);
-// addAnimeToLibrary("Charlotte", "Jun Maeda", 12, false);
-
-
-
-
-
-
