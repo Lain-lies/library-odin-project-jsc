@@ -11,10 +11,8 @@ function addAnimeToLibrary(valuesFromForm){
     const generatedAnime = new Anime(...valuesFromForm);
     animeLibrary.push(generatedAnime);
 
-    generatedAnime.showInDOM(generatedAnime.createDisplayNode(generatedAnime)); 
+    generatedAnime.showInDOM(generatedAnime.createDisplayNode()); 
     
-    console.log(animeLibrary);
-    console.log(Object.getPrototypeOf(Anime));
 
 }
 
@@ -65,14 +63,13 @@ Anime.prototype.createDisplayNode = function (){
 
     deleteButton.addEventListener("click", () => {
         
-        animeLibrary = animeLibrary.filter(anime => anime.title === libraryItemChildren[0].textContent);
+        animeLibrary = animeLibrary.filter(anime => anime.title !== libraryItemChildren[0].textContent);
 
         library.removeChild(libraryItemClone);
         console.log(animeLibrary);
 
     });
 
-    console.log(libraryItemClone);
 
     return libraryItemClone;
 
