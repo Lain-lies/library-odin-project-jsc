@@ -41,6 +41,8 @@ Anime.prototype.createDisplayNode = function (){
 
     }
 
+    if(this.watchStatus === "Finished") libraryItemClone.classList.add("library-item-finished");
+
     changeStatusButton.addEventListener("click", () => {
 
         if(this.watchStatus === "Watching"){
