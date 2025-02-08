@@ -32,6 +32,7 @@ Anime.prototype.createDisplayNode = function (){
 
     const libraryItemClone = libraryItem.cloneNode(true);
     const libraryItemChildren = [...libraryItemClone.children];
+    const currentStatus = libraryItemChildren[libraryItemChildren.length - 3]
     const changeStatusButton = libraryItemChildren[libraryItemChildren.length - 2];
     const deleteButton = libraryItemChildren[libraryItemChildren.length - 1];
     const animeValues = Object.values(this);
@@ -44,8 +45,21 @@ Anime.prototype.createDisplayNode = function (){
 
     changeStatusButton.addEventListener("click", () => {
 
-        this.watchStatus = "clicked";
-        console.log(this);
+        if(this.watchStatus === "Watching"){
+            
+            this.watchStatus = "Finished";
+            currentStatus.textContent = this.watchStatus;
+            console.log(this);
+
+        }else{
+
+            this.watchStatus = "Watching";
+            currentStatus.textContent = this.watchStatus;
+            console.log(this)
+
+        }
+
+        libraryItemClone.classList.toggle("library-item-finished");
 
     }); 
 
